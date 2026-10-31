@@ -11,7 +11,7 @@ const LOCAL_FILE = path.join(__dirname, '..', '..', '.data', 'site.json');
 // Create the Blob store as "Private" (recommended). If you made a Public store,
 // set BLOB_ACCESS=public in the project's environment variables.
 const access = () => (process.env.BLOB_ACCESS === 'public' ? 'public' : 'private');
-const hasBlob = () => !!process.env.BLOB_READ_WRITE_TOKEN;
+   const hasBlob = () => !!(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
 
 async function read() {
   if (hasBlob()) {
