@@ -1,0 +1,174 @@
+{
+  "profile": {
+    "name": "Karan Sharma",
+    "kicker": "B.Tech student / Player 1 ready",
+    "tagline": "I learn by building things you can **click, break and beat**. Scroll down. There is an arcade.",
+    "role": "Engineering student, builder",
+    "level": "Lv. B.Tech",
+    "aboutTitle": "Hi, I'm Karan.",
+    "about": [
+      "I'm a B.Tech student who understands an idea best once I have built a small version of it. Arrays click after I write a game loop. Networking clicks after I break a server on purpose.",
+      "I like clean code, odd side projects and problems with more than one right answer. This page is one of them: a portfolio you can play.",
+      "I'm looking for internships, hackathon teams and people who build things for fun."
+    ],
+    "email": "ksharma2908ks@gmail.com",
+    "github": "",
+    "linkedin": "",
+    "status": "Status: learning",
+    "quest": "Quest: ship more"
+  },
+  "stats": [
+    {
+      "label": "Coding",
+      "value": 82,
+      "color": "cyan"
+    },
+    {
+      "label": "Curiosity",
+      "value": 95,
+      "color": "sun"
+    },
+    {
+      "label": "Attendance",
+      "value": 0,
+      "color": "coral"
+    },
+    {
+      "label": "Sleep",
+      "value": 18,
+      "color": "mint"
+    }
+  ],
+  "facts": [
+    {
+      "k": "Studying",
+      "v": "B.Tech"
+    },
+    {
+      "k": "Favourite bug",
+      "v": "Off-by-one"
+    },
+    {
+      "k": "Games on this page",
+      "v": "6, all playable"
+    }
+  ],
+  "avatar": {
+    "skin": 1,
+    "hair": 1,
+    "hairColor": 0,
+    "eyes": 2,
+    "mouth": 1,
+    "gear": 2,
+    "top": 0,
+    "outfit": 0,
+    "bgStyle": 1,
+    "bg": 1
+  },
+  "defaultMode": "dark",
+  "trail": true,
+  "mobs": true,
+  "socials": [
+    {
+      "name": "GitHub",
+      "url": ""
+    },
+    {
+      "name": "LinkedIn",
+      "url": ""
+    }
+  ],
+  "sections": {
+    "about": true,
+    "loadout": true,
+    "work": true,
+    "player": true,
+    "arcade": true,
+    "contact": true
+  },
+  "games": {
+    "snake": true,
+    "chess": true,
+    "ttt": true,
+    "dino": true,
+    "memory": true,
+    "dodge": true
+  },
+  "skills": [
+    {
+      "title": "Languages",
+      "color": "cyan",
+      "items": [
+        "C",
+        "C++",
+        "Python",
+        "JavaScript"
+      ]
+    },
+    {
+      "title": "Web",
+      "color": "sun",
+      "items": [
+        "HTML",
+        "CSS",
+        "Canvas",
+        "React"
+      ]
+    },
+    {
+      "title": "Tools",
+      "color": "coral",
+      "items": [
+        "Git",
+        "GitHub",
+        "Linux",
+        "VS Code"
+      ]
+    },
+    {
+      "title": "Core CS",
+      "color": "mint",
+      "items": [
+        "DSA",
+        "OOP",
+        "DBMS",
+        "OS"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Algo Visualizer",
+      "desc": "Watch sorting and pathfinding algorithms run step by step, with speed control and a count of comparisons.",
+      "tags": [
+        "JavaScript",
+        "Canvas",
+        "DSA"
+      ],
+      "link": "",
+      "badge": "Sample"
+    },
+    {
+      "title": "Campus Notes",
+      "desc": "A shared notes and deadlines board for a class, with tags, search and an exam countdown.",
+      "tags": [
+        "Python",
+        "SQL",
+        "Flask"
+      ],
+      "link": "",
+      "badge": "Sample"
+    },
+    {
+      "title": "This Arcade",
+      "desc": "Six mini games running on one page, including a chess bot powered by Stockfish. Play them below.",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "link": "",
+      "badge": "Live"
+    }
+  ]
+}

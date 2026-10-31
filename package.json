@@ -1,0 +1,16 @@
+{
+  "name": "karan-sharma-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pixel arcade portfolio with games, display modes and a password-protected master panel.",
+  "scripts": {
+    "dev": "node dev-server.js",
+    "secrets": "node scripts/gen-secrets.js",
+    "build:page": "node scripts/build-page.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "@vercel/blob": "^2.0.0"
+  },
+  "license": "MIT"
+}
