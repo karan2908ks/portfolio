@@ -16,6 +16,8 @@ Built as plain HTML, CSS and JavaScript plus a few small serverless functions. N
 - **Six display modes** with a picker in the header: Dark, Light, Craft (Minecraft-style blocks and dirt), Terminal (green CRT), Neon, Sunset
 - **Minecraft touches**: a diamond-sword slash on every click, a creeper, pig, chicken (it lays eggs) and a bow-shooting skeleton in the footer, a chicken, pig and skeleton on your name (click mobs to hit them), spiders that drop from webs, cobwebs in the corners, flickering torches, rising XP orbs, sections that pop in as you scroll, Minecraft-style "Achievement made!" pop-ups and a "Mobs slain" counter. In Craft mode your cursor becomes a diamond sword. Turn all of this off in the Master panel under Site → Effects
 - Animations: pixel-dissolve when switching modes, block-break bursts when you click, pixel cursor trail, scroll XP bar, floating pixels (clouds in Craft), card tilt, stepped hover effects, an interactive footer with a moving network and click-and-drag drawing
+- **Pixel buddy** beside the intro: idles, blinks, walks, jumps, and waves with a speech bubble ("Hi! Welcome!") when you hover, focus or tap it
+- **Animated name**: letters drop in, hop when hovered and ripple in a wave every few seconds
 - Easter egg: type the Konami code (up up down down left right left right B A)
 
 **Arcade (6 games)**
@@ -28,6 +30,10 @@ Built as plain HTML, CSS and JavaScript plus a few small serverless functions. N
 | **Dino Rush** | Space or up arrow to jump, down arrow to duck, tap on phones |
 | Memory Match | Click cards |
 | Dodge | Arrow keys or A and D, drag on phones |
+
+**Global leaderboard (Hall of fame)**
+
+After a round of Snake, Dino Rush, Dodge or Memory, visitors can submit their score with their Player lab avatar and a name. The top 10 for each game is public. The server (`api/score.js`) checks every submission: it needs a signed run token issued when the round started, the round must have lasted long enough for that score, each token works once, scores are capped per game, and names and avatars are cleaned. Scores come from the visitor's browser, so a determined cheater cannot be fully stopped. Remove anything you do not want in the Master panel's **Scores** tab. Needs `SESSION_SECRET` and the Blob store (the same ones the Master login uses).
 
 **Master panel (admin)**
 
@@ -58,6 +64,9 @@ karan-portfolio/
 │   ├── login.js             Checks the password, sets a signed cookie
 │   ├── logout.js, session.js
 │   ├── save.js              Saves edited content (admin only)
+│   ├── score.js             Leaderboard: issue run token, validate and store a score
+│   ├── scores.js            Leaderboard: public top 10 per game
+│   ├── scoreadmin.js        Leaderboard: remove scores (admin only)
 │   ├── site.js              Returns saved content to visitors
 │   └── _lib/                Shared helpers: auth, storage, http
 ├── scripts/
@@ -146,7 +155,7 @@ Vercel's servers cannot write to disk, so edits are stored in a free **Vercel Bl
 
 1. In your Vercel project open the **Storage** tab.
 2. Create a **Blob** store. When asked for access, choose **Private** (recommended).
-3. Connect the store to your project for all environments. Vercel adds a variable called `BLOB_READ_WRITE_TOKEN` automatically.
+3. Connect the store to your project for all environments. Vercel adds `BLOB_STORE_ID` (newer stores) or `BLOB_READ_WRITE_TOKEN` (older ones) automatically.
 4. Go to **Deployments**, open the **⋯** menu on the latest deployment and click **Redeploy** so the new variable is picked up.
 
 If you chose a **Public** store instead, also add the environment variable `BLOB_ACCESS` with the value `public` and redeploy.
@@ -216,6 +225,7 @@ Vercel project → **Settings → Domains** → add your domain and follow the D
 | "Wrong password" but you are sure it is right | Check for a space at the start or end when pasting. Remember that you must redeploy after changing environment variables |
 | Master login link does not show | The API is not running. On Vercel check the Functions tab for errors. Locally use `npm run dev`, not a plain file server |
 | Chess says "Engine: built-in" | `stockfish.js` did not load. Make sure `public/stockfish.js` is committed and the site is served over https or localhost |
+| Leaderboard says "server is not running" or "offline" | The `api` folder is not deployed, or `SESSION_SECRET` is missing. See the Master login rows above |
 | Edits do not appear right away | Wait up to a minute for the cache, then hard refresh |
 | A visitor's saved mode ignores your default | Visitors who picked a mode keep it. They can choose **Site default** in the mode menu |
 

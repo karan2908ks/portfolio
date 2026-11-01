@@ -77,4 +77,4 @@ function looksLikeOurClient(req) {
   return req.headers['x-requested-with'] === 'portfolio' && /application\/json/i.test(req.headers['content-type'] || '');
 }
 
-module.exports = { TTL_SECONDS, checkPassword, makeToken, isAdmin, cookie, looksLikeOurClient };
+module.exports = { TTL_SECONDS, checkPassword, makeToken, isAdmin, cookie, looksLikeOurClient, sign };

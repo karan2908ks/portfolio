@@ -396,6 +396,54 @@ header .xp i{display:block;height:100%;width:0;background:var(--sun);background-
 @media (max-width:640px){.spd{width:34px}.crp{width:34px}.torch{width:20px}.hsword{width:60px;right:-22px;top:-36px}.web{opacity:.4}}
 
 
+
+/* ---------- name letters, pixel buddy, hall of fame ---------- */
+.ltr{display:inline-block;animation:ltrIn .55s steps(5) both;animation-delay:calc(var(--i)*55ms)}
+@keyframes ltrIn{0%{transform:translateY(-.5em);opacity:0}70%{transform:translateY(.08em);opacity:1}100%{transform:none;opacity:1}}
+.ltr-done .ltr{animation:none;opacity:1}
+.ltr-done .ltr:hover{animation:ltrHop .5s steps(5) 1}
+@keyframes ltrHop{40%{transform:translateY(-.22em) rotate(-6deg)}70%{transform:translateY(.02em) rotate(2deg)}}
+.ltr-done.wave .ltr{animation:ltrWave .8s steps(8) 1;animation-delay:calc(var(--i)*70ms)}
+@keyframes ltrWave{30%{transform:translateY(-.16em)}60%{transform:translateY(.04em)}}
+.intro{display:grid;grid-template-columns:minmax(0,36ch) minmax(150px,1fr);gap:12px 20px;align-items:end}
+.intro .lede{max-width:none}
+.buddy-stage{position:relative;height:150px;min-width:0}
+.buddy-stage::after{content:"";position:absolute;left:0;right:0;bottom:12px;height:6px;background:repeating-linear-gradient(90deg,var(--line) 0 10px,transparent 10px 16px);opacity:.9}
+.buddy{position:absolute;left:0;bottom:18px;width:60px;height:96px;padding:0;border:0;background:none;cursor:pointer;color:inherit;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.buddy:focus-visible{outline:3px dashed var(--sun);outline-offset:4px}
+.bsprite{display:block;width:60px;height:80px;margin-top:16px;image-rendering:pixelated;transform-origin:50% 100%}
+.bsprite svg{display:block;width:60px;height:80px;shape-rendering:crispEdges}
+.buddy.jump .bsprite{animation:bjump .62s steps(10) 1}
+@keyframes bjump{0%{transform:translateY(0)}45%{transform:translateY(-44px)}100%{transform:translateY(0)}}
+.bshadow{position:absolute;left:12px;right:12px;bottom:-4px;height:6px;background:rgba(0,0,0,.28);border-radius:50%}
+.bsay{position:absolute;bottom:100%;left:0;margin-bottom:6px;white-space:nowrap;background:var(--ink);color:var(--on);font-family:var(--f-pixel);font-size:9px;text-transform:uppercase;padding:9px 11px;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--coral);pointer-events:none;opacity:0;transform:translateY(6px);transition:opacity .15s steps(3),transform .15s steps(3);z-index:3}
+.bsay.on{opacity:1;transform:none}
+.bsay::after{content:"";position:absolute;left:var(--tail,20px);top:100%;border:6px solid transparent;border-top-color:var(--ink)}
+@media (max-width:760px){.intro{grid-template-columns:minmax(0,1fr)}.buddy-stage{height:130px}}
+.lbcard{margin-top:22px;background:var(--bg2);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--sun);padding:16px;display:grid;gap:12px}
+.lbcard[hidden]{display:none}
+.lbcard h4{margin:0;font-size:1.05rem}
+.lbrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.lbrow input{flex:1 1 160px;min-width:0;font:inherit;background:var(--bg);color:var(--ink);border:3px solid var(--line);padding:10px 12px}
+.lbrow input:focus{outline:none;border-color:var(--sun)}
+.lbav{width:44px;height:44px;border:3px solid var(--ink);flex:none;overflow:hidden}
+.lbav svg{display:block;width:100%;height:100%;image-rendering:pixelated}
+.lbmsg{margin:0;min-height:1.3em;color:var(--mintT);font-size:.95rem}
+.hof{margin-top:32px}
+.hof h3{font-size:1.5rem;text-transform:uppercase;margin:0 0 4px}
+.hof-sub{margin:0 0 14px;color:var(--mute)}
+.hof-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.hof-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.hof-item{display:grid;grid-template-columns:34px 40px minmax(0,1fr) auto;gap:12px;align-items:center;border:3px solid var(--line);background:var(--bg2);padding:8px 12px}
+.hof-item:nth-child(1){border-color:var(--sun)}.hof-item:nth-child(2){border-color:var(--cyan)}.hof-item:nth-child(3){border-color:var(--coral)}
+.hof-rank{font-family:var(--f-pixel);font-size:11px;color:var(--sunT)}
+.hof-av{width:40px;height:40px;border:2px solid var(--ink);overflow:hidden}
+.hof-av svg{display:block;width:100%;height:100%;image-rendering:pixelated}
+.hof-name{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hof-name small{display:block;font-weight:400;color:var(--mute);font-size:.78rem}
+.hof-score{font-family:var(--f-pixel);font-size:13px;color:var(--mintT);font-variant-numeric:tabular-nums}
+.hof-empty{color:var(--mute);padding:14px;border:3px dashed var(--line);margin:0}
+
 /* ---------- more mobs, arrows, eggs, toasts, reveal ---------- */
 .walker{bottom:0;left:-80px;animation:crwalk var(--dur,26s) linear infinite;animation-delay:var(--dl,0s)}
 .walker.rtl{left:auto;right:-80px;animation-name:rlwalk;transform:scaleX(-1)}
@@ -432,6 +480,8 @@ header .xp i{display:block;height:100%;width:0;background:var(--sun);background-
 @media (max-width:640px){.pigm{width:36px}.chkm{width:24px}.skel{width:32px}.hpig{width:34px}.hchk{width:24px}.hskel{display:none}}
 
 @media (prefers-reduced-motion:reduce){
+  .ltr,.ltr-done .ltr:hover,.ltr-done.wave .ltr{animation:none!important;opacity:1}
+  .buddy.jump .bsprite{animation:none}
   .walker,.walker svg,.skel svg,.hchk,.hpig,.hskel{animation:none}
   .walker,.arrow,.egg{display:none}
   .rv{opacity:1;transform:none}
@@ -472,7 +522,13 @@ header .xp i{display:block;height:100%;width:0;background:var(--sun);background-
         <div class="hero-av-wrap"><div class="hero-av" id="heroAv" role="img" aria-label="Karan's avatar"></div><div class="hsword" id="hSword" aria-hidden="true"></div></div>
         <h1><span id="hFirst"></span><br><span class="out" id="hLast"></span><span class="cursor" aria-hidden="true"></span><span class="namemobs" id="nameMobs"></span></h1>
       </div>
-      <p class="lede" id="hTag"></p>
+      <div class="intro">
+        <p class="lede" id="hTag"></p>
+        <div class="buddy-stage" id="buddyStage">
+          <span class="bsay" id="bSay" role="status" aria-live="polite"></span>
+          <button type="button" class="buddy" id="buddy" aria-label="Say hi to the pixel buddy"><span class="bsprite" id="bSprite"></span><span class="bshadow"></span></button>
+        </div>
+      </div>
       <div class="btns">
         <a class="btn" href="#arcade">Insert coin</a>
         <a class="btn ghost" href="#work">See projects</a>
@@ -618,6 +674,13 @@ header .xp i{display:block;height:100%;width:0;background:var(--sun);background-
           <p class="howto">Left and right arrows or A and D. On a phone, drag across the board.</p>
         </div>
       </div>
+    </div>
+    <div class="lbcard" id="lbSubmit" hidden></div>
+    <div class="hof" id="hof">
+      <h3>Hall of fame</h3>
+      <p class="hof-sub">Global top 10 for every visitor. Finish a round and submit your score with your avatar and name.</p>
+      <div class="hof-tabs" id="hofTabs" role="tablist" aria-label="Leaderboard game"></div>
+      <ol class="hof-list" id="hofList" aria-live="polite"></ol>
     </div>
   </section>
 
@@ -906,6 +969,18 @@ function sanitize(o){
 }
 var state=clone(DEFAULT),dirty=false;
 
+/* ---------- animated name letters ---------- */
+function letterize(el,text,offset){
+  el.textContent="";el.setAttribute("aria-hidden","true");
+  String(text).split("").forEach(function(ch,i){var sp=document.createElement("span");sp.className="ltr";sp.style.setProperty("--i",offset+i);sp.textContent=ch===" "?" ":ch;el.appendChild(sp)});
+}
+(function(){
+  var h1=document.querySelector(".namerow h1");if(!h1)return;
+  setTimeout(function(){h1.classList.add("ltr-done")},1800);
+  if(reduce)return;
+  setInterval(function(){if(document.hidden||!h1.classList.contains("ltr-done"))return;h1.classList.add("wave");setTimeout(function(){h1.classList.remove("wave")},1500)},6500);
+})();
+
 /* ---------- render page from state ---------- */
 function boldText(el,txt){
   el.textContent="";
@@ -917,7 +992,7 @@ function render(){
   var svg=avatarSVG(state.avatar);
   $("#heroAv").innerHTML=svg;$("#cardAv").innerHTML=svg;$("#logoAv").innerHTML=svg;
   var parts=p.name.trim().split(/\s+/),first=parts.shift()||"",rest=parts.join(" ");
-  $("#hFirst").textContent=first;$("#hLast").textContent=rest;
+  letterize($("#hFirst"),first,0);letterize($("#hLast"),rest,first.length);$("#hFirst").parentNode.setAttribute("aria-label",first+" "+rest);
   $("#logoName").textContent=p.name;$("#cName").textContent=p.name;$("#cRole").textContent=p.role;
   $("#fName").textContent=p.name;$("#fName2").textContent=p.name;
   $("#hKicker").textContent=p.kicker;$("#cLv").textContent=p.level;
@@ -961,15 +1036,16 @@ function render(){
 
 /* ---------- hud/veil helpers ---------- */
 var onScore=function(){};
+var LB={begin:function(){},end:function(){}};
 function makeHud(name,low){
   var el=$('[data-hud="'+name+'"]'),s=$(".s",el),b=$(".b",el),best=store.get("ks-"+name);
   b.textContent=best||"-";
   return {set:function(n){s.textContent=n},
-    finish:function(n){var better=low?(best===0||n<best):n>best;if(better&&n>0){best=n;store.set("ks-"+name,n);b.textContent=n;onScore();return true}return false}};
+    finish:function(n){LB.end(name,n);var better=low?(best===0||n<best):n>best;if(better&&n>0){best=n;store.set("ks-"+name,n);b.textContent=n;onScore();return true}return false}};
 }
 function makeVeil(name){
   var v=$('[data-veil="'+name+'"]'),hh=$("h4",v),p=$("p",v),btn=$("button",v);
-  return {btn:btn,show:function(t,m,l){hh.textContent=t;p.textContent=m;btn.textContent=l;v.hidden=false},hide:function(){v.hidden=true}};
+  return {btn:btn,show:function(t,m,l){hh.textContent=t;p.textContent=m;btn.textContent=l;v.hidden=false},hide:function(){v.hidden=true;LB.begin(name)}};
 }
 
 /* ---------- hero stars ---------- */
@@ -1692,6 +1768,145 @@ var me=null,lab={cfg:randomAvatar(),name:""};
   }
 })();
 
+
+/* ---------- pixel buddy beside the intro ---------- */
+(function(){
+  var stage=$("#buddyStage"),btn=$("#buddy"),spr=$("#bSprite"),say=$("#bSay");if(!stage||!btn)return;
+  var PAL={H:"#1a1626",S:"#f1c9a5",k:"#8a5a3a",E:"#15122b",C:"#ff5d73",c:"#d8445a",P:"#4a4ec0",B:"#f4efe4",M:"#9b2d3f"};
+  var HEAD=["...HHHHHH...","..HHHHHHHH..","..HSSSSSSH..","..SSESSESS..","..SSSSSSSS..","...SSSSSS..."];
+  var BLINK=HEAD.slice();BLINK[3]="..SSkSSkSS..";
+  var TALK=HEAD.slice();TALK[5]="...SMMMMSS..";
+  var ARMS=["....SSSS....","..CCCCCCCC..",".SCCCCCCCCS.",".SCCCCCCCCS.","..CcCCCCcC..","..CCCCCCCC.."];
+  var LEG0=["...PPPPPP...","...PP..PP...","...PP..PP...","..BBB..BBB.."];
+  var LEG1=["...PPPPPP...","..PPP..PPP..",".PPP....PP..",".BBB....BB.."];
+  var LEG2=["...PPPPPP...","...PP..PPP..","...PP...PPP.","..BBB...BBB."];
+  var UP=[".S..SSSS..S.",".SSCCCCCCSS.","..CCCCCCCC..","..CCCCCCCC..","..CcCCCCcC..","..CCCCCCCC.."];
+  var LEGJ=["...PPPPPP...","..PP....PP..",".PP......PP.",".BB......BB."];
+  var W1=["....SSSS..S.","..CCCCCCCCS.",".SCCCCCCCC..",".SCCCCCCCC..","..CcCCCCcC..","..CCCCCCCC.."];
+  var W2=["....SSSS.S..","..CCCCCCCCSS",".SCCCCCCCC..",".SCCCCCCCC..","..CcCCCCcC..","..CCCCCCCC.."];
+  var FR={idle:HEAD.concat(ARMS,LEG0),blink:BLINK.concat(ARMS,LEG0),walk1:HEAD.concat(ARMS,LEG1),walk2:HEAD.concat(ARMS,LEG2),
+    jump:HEAD.concat(UP,LEGJ),wave1:TALK.concat(W1,LEG0),wave2:HEAD.concat(W2,LEG0)};
+  var SVG={};
+  Object.keys(FR).forEach(function(k){var r=[];FR[k].forEach(function(row,y){for(var x=0;x<12;x++){var c=PAL[row[x]];if(c)r.push('<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="'+c+'"/>')}});
+    SVG[k]='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16" aria-hidden="true">'+r.join("")+'</svg>'});
+  var cur="";function frame(k){if(k!==cur){cur=k;spr.innerHTML=SVG[k]}}
+  var LINES=["Hi! Welcome!","Hey there!","Welcome to Karan's arcade!","Hello, visitor!","Try the games below!","Psst. Beat the creeper!"];
+  var BOX=60,x=0,dir=1,mode="idle",tgt=0,until=0,hover=false,hiUntil=0,jumpUntil=0,blinkUntil=0,nextBlink=0,lastLine=-1,hideT=0,raf=0,last=0,greeted=false,stepT=0;
+  function range(){return Math.max(0,stage.clientWidth-BOX)}
+  function speak(text,ms){
+    say.textContent=text;say.classList.add("on");
+    var w=say.offsetWidth,cx=x+BOX/2,left=Math.max(0,Math.min(stage.clientWidth-w,cx-w/2));
+    say.style.left=left+"px";say.style.bottom="calc(100% - 14px)";say.style.setProperty("--tail",Math.max(8,Math.min(w-20,cx-left-6))+"px");
+    clearTimeout(hideT);hideT=setTimeout(function(){say.classList.remove("on")},ms||2200);
+  }
+  function line(){var i;do{i=Math.floor(Math.random()*LINES.length)}while(i===lastLine);lastLine=i;return LINES[i]}
+  function greet(){hiUntil=performance.now()+1800;speak(LINES[0],2000)}
+  function pickNext(now){
+    var r=Math.random();
+    if(r<.55&&range()>20){mode="walk";tgt=Math.random()*range();dir=tgt>=x?1:-1}
+    else if(r<.8){mode="jump";jumpUntil=now+650;btn.classList.remove("jump");void btn.offsetWidth;btn.classList.add("jump")}
+    else{mode="idle";until=now+1500+Math.random()*2000}
+  }
+  function tick(now){
+    raf=0;var dt=Math.min(.05,(now-last)/1000);last=now;
+    var hi=hover||now<hiUntil;
+    if(hi){frame(Math.floor(now/230)%2?"wave2":"wave1");dir=1}
+    else if(mode==="walk"){
+      x+=dir*46*dt;if((dir>0&&x>=tgt)||(dir<0&&x<=tgt)){x=tgt;mode="idle";until=now+1200+Math.random()*2200}
+      frame(Math.floor(now/170)%2?"walk1":"walk2");
+    }else if(mode==="jump"){frame("jump");if(now>=jumpUntil){mode="idle";btn.classList.remove("jump");until=now+1000+Math.random()*1800}}
+    else{
+      if(now>nextBlink){blinkUntil=now+130;nextBlink=now+2200+Math.random()*2600}
+      frame(now<blinkUntil?"blink":"idle");
+      if(now>until)pickNext(now);
+    }
+    x=Math.max(0,Math.min(range(),x));
+    btn.style.transform="translateX("+Math.round(x)+"px)";
+    spr.style.transform=dir<0&&!hi?"scaleX(-1)":"";
+    if(say.classList.contains("on")){var w=say.offsetWidth,cx=x+BOX/2,left=Math.max(0,Math.min(stage.clientWidth-w,cx-w/2));say.style.left=left+"px";say.style.setProperty("--tail",Math.max(8,Math.min(w-20,cx-left-6))+"px")}
+    if(vis)raf=requestAnimationFrame(tick);
+  }
+  var vis=true;
+  function kick(){if(!raf&&vis&&!reduce){last=performance.now();raf=requestAnimationFrame(tick)}}
+  frame("idle");btn.style.transform="translateX(0)";
+  if(reduce){
+    btn.addEventListener("pointerenter",function(){frame("wave1");speak(LINES[0],2200)});
+    btn.addEventListener("pointerleave",function(){frame("idle")});
+    return;
+  }
+  btn.addEventListener("pointerenter",function(e){if(e.pointerType==="touch")return;hover=true;speak(line(),2400);kick()});
+  btn.addEventListener("pointerleave",function(){hover=false;hiUntil=performance.now()+700});
+  btn.addEventListener("focus",function(){hover=true;speak(line(),2400);kick()});
+  btn.addEventListener("blur",function(){hover=false});
+  btn.addEventListener("click",function(){
+    var now=performance.now();hiUntil=now+1200;mode="jump";jumpUntil=now+650;btn.classList.remove("jump");void btn.offsetWidth;btn.classList.add("jump");
+    speak(line(),2200);fxBurst&&fxBurst(btn.getBoundingClientRect().left+30,btn.getBoundingClientRect().top+20,8,["#ff5d73","#ffd23f","#ffffff"]);kick();
+  });
+  addEventListener("resize",function(){x=Math.min(x,range())});
+  if("IntersectionObserver" in window)new IntersectionObserver(function(en){vis=en[0].isIntersecting;if(vis){kick();if(!greeted){greeted=true;setTimeout(greet,900)}}},{threshold:.2}).observe(stage);
+  else{kick();setTimeout(greet,900)}
+  until=performance.now()+1200;nextBlink=performance.now()+1800;
+})();
+
+/* ---------- global leaderboard ---------- */
+LB=(function(){
+  var G=[["snake","Snake","pts",1],["dino","Dino Rush","pts",1],["dodge","Dodge","pts",1],["memory","Memory","moves",8]];
+  var info={};G.forEach(function(g){info[g[0]]={name:g[1],unit:g[2],min:g[3]}});
+  var run=null,pending=null,cur="snake",board=null,card=$("#lbSubmit"),list=$("#hofList"),tabs=$("#hofTabs");
+  function ago(t){var s=Math.max(1,Math.floor((Date.now()-t)/1000));if(s<90)return "just now";var m=Math.floor(s/60);if(m<60)return m+" min ago";var hr=Math.floor(m/60);if(hr<48)return hr+" h ago";return Math.floor(hr/24)+" days ago"}
+  function begin(game){
+    if(!info[game])return;var r={game:game,token:null};run=r;hideCard();
+    jsonPost("api/score",{action:"start",game:game}).then(readRes).then(function(x){if(x.ok&&x.j&&x.j.token)r.token=x.j.token}).catch(function(){});
+  }
+  function end(game,score){
+    if(!info[game]||!run||run.game!==game||!run.token||!(score>=info[game].min))return;
+    pending={game:game,score:score,token:run.token};run=null;showCard();
+  }
+  function hideCard(){pending=null;card.hidden=true;card.textContent=""}
+  function who(){return {name:(me&&me.name)||(sget("ks-lbname")||""),av:(me&&me.av)||lab.cfg}}
+  function showCard(){
+    var pd=pending,w=who(),inf=info[pd.game];card.textContent="";card.hidden=false;
+    var av=h("div",{class:"lbav"});av.innerHTML=avatarSVG(w.av);
+    var nm=h("input",{type:"text",maxlength:14,placeholder:"Your name",value:w.name==="Guest"?"":w.name,"aria-label":"Name for the leaderboard"});nm.value=w.name==="Guest"?"":w.name;
+    var msg=h("p",{class:"lbmsg",role:"status"});
+    var go=h("button",{type:"button",class:"btn sm"},"Submit score"),skip=h("button",{type:"button",class:"btn sm ghost",onclick:hideCard},"Skip");
+    go.addEventListener("click",function(){
+      var name=nm.value.trim();if(name.length<2){msg.textContent="Type a name of at least 2 characters.";return}
+      go.disabled=true;msg.textContent="Submitting...";sset("ks-lbname",name);
+      jsonPost("api/score",{action:"submit",token:pd.token,name:name,avatar:w.av,score:pd.score}).then(readRes).then(function(x){
+        if(x.status===404||x.status===405){msg.textContent="The leaderboard server is not running here. On Vercel, deploy the api folder (see README).";go.disabled=false;return}
+        if(!x.ok){msg.textContent=(x.j&&x.j.error)||"Could not submit.";go.disabled=false;if(x.status===400)pending=null;return}
+        msg.textContent=x.j.kept?"Submitted! You are #"+x.j.rank+" in "+inf.name+".":"Saved. Your best in "+inf.name+" is higher, so it stays #"+x.j.rank+".";
+        pending=null;cur=pd.game;load();setTimeout(hideCard,5000);
+      }).catch(function(){msg.textContent="Could not reach the server.";go.disabled=false});
+    });
+    card.appendChild(h("h4",null,inf.name+": "+pd.score+" "+inf.unit));
+    card.appendChild(h("div",{class:"lbrow"},av,nm));
+    card.appendChild(h("div",{class:"lbrow"},go,skip));card.appendChild(msg);
+    var r=card.getBoundingClientRect();if(r.top>innerHeight-80){try{card.scrollIntoView({block:"nearest",behavior:reduce?"auto":"smooth"})}catch(e){}}
+  }
+  function tabsDraw(){
+    tabs.textContent="";
+    G.forEach(function(g){tabs.appendChild(h("button",{type:"button",class:"opt"+(cur===g[0]?" on":""),"aria-pressed":cur===g[0],onclick:function(){cur=g[0];tabsDraw();listDraw()}},g[1]))});
+  }
+  function listDraw(){
+    list.textContent="";
+    if(!board){list.appendChild(h("li",{class:"hof-empty"},"Loading..."));return}
+    if(board==="off"){list.appendChild(h("li",{class:"hof-empty"},"The leaderboard is offline right now."));return}
+    var rows=(board.games&&board.games[cur])||[],inf=info[cur];
+    if(!rows.length){list.appendChild(h("li",{class:"hof-empty"},"No scores yet. Be the first."+(cur==="memory"?" Fewest moves wins.":"")));return}
+    rows.forEach(function(e,i){
+      var av=h("div",{class:"hof-av"});av.innerHTML=avatarSVG(e.av);
+      list.appendChild(h("li",{class:"hof-item"},h("span",{class:"hof-rank"},"#"+(i+1)),av,h("span",{class:"hof-name"},e.name,h("small",null,ago(e.t))),h("span",{class:"hof-score"},e.score+" "+inf.unit)));
+    });
+  }
+  function load(){
+    return getJSON("api/scores").then(function(j){board=j;tabsDraw();listDraw()}).catch(function(){board="off";tabsDraw();listDraw()});
+  }
+  tabsDraw();listDraw();load();
+  return {begin:begin,end:end,reload:load};
+})();
+
 /* ---------- tabs + keys ---------- */
 var games={snake:Snake,memory:Memory,dino:Dino,dodge:Dodge,ttt:TTT,chess:ChessG},current="snake";
 function select(name,focus){
@@ -1855,7 +2070,29 @@ function tabAvatar(){
   w.appendChild(h("button",{type:"button",class:"btn sm alt",onclick:function(){var r=randomAvatar();TRAITS.forEach(function(t){state.avatar[t.key]=r[t.key]});markDirty();showTab()}},"Randomize"));
   return w;
 }
-var TABS=[["profile","Profile",tabProfile],["skills","Skills",tabSkills],["projects","Projects",tabProjects],["avatar","Avatar",tabAvatar],["site","Site",tabSite]];
+function tabScores(){
+  var w=h("div",{class:"pf"}),names={snake:"Snake",dino:"Dino Rush",dodge:"Dodge",memory:"Memory"};
+  w.appendChild(h("p",{class:"hint"},"Remove any score you do not want on the public leaderboard. Changes apply right away."));
+  var box=h("div",{class:"pf"});w.appendChild(box);
+  function load(){
+    getJSON("api/scores").then(function(j){
+      box.textContent="";
+      Object.keys(names).forEach(function(g){
+        var rows=(j.games&&j.games[g])||[];
+        var b=h("div",{class:"pbox"},h("p",{class:"px"},names[g]));
+        if(!rows.length)b.appendChild(h("p",{class:"hint"},"No scores."));
+        rows.forEach(function(e){
+          b.appendChild(h("div",{class:"prow"},h("span",null,e.name+": "+e.score),h("button",{type:"button",class:"opt",onclick:function(){
+            jsonPost("api/scoreadmin",{action:"delete",game:g,id:e.id}).then(readRes).then(function(x){if(x.ok){load();LB.reload()}else say((x.j&&x.j.error)||"Could not delete.")})}},"Delete")));
+        });
+        if(rows.length)b.appendChild(h("button",{type:"button",class:"opt",onclick:function(e2){var bt=e2.currentTarget;if(bt.dataset.armed){jsonPost("api/scoreadmin",{action:"clear",game:g}).then(readRes).then(function(x){if(x.ok){load();LB.reload()}else say((x.j&&x.j.error)||"Could not clear.")})}else{bt.dataset.armed="1";bt.textContent="Sure? Click again"}}},"Clear "+names[g]+" board"));
+        box.appendChild(b);
+      });
+    }).catch(function(){box.textContent="";box.appendChild(h("p",{class:"hint"},"Could not load scores. The server API is needed for the leaderboard."))});
+  }
+  load();return w;
+}
+var TABS=[["profile","Profile",tabProfile],["skills","Skills",tabSkills],["projects","Projects",tabProjects],["avatar","Avatar",tabAvatar],["scores","Scores",tabScores],["site","Site",tabSite]];
 function showTab(t){
   if(t)portal.tab=t;
   $$(".ptabs .opt",portal.el).forEach(function(b){var on=b.dataset.tab===portal.tab;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
