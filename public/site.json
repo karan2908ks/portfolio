@@ -92,7 +92,9 @@
     "ttt": true,
     "dino": true,
     "memory": true,
-    "dodge": true
+    "dodge": true,
+    "typing": true,
+    "bughunt": true
   },
   "skills": [
     {
