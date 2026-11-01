@@ -14,9 +14,8 @@ Built as plain HTML, CSS and JavaScript plus a few small serverless functions. N
 - About, Skills ("Loadout"), Projects, Contact
 - **Player lab**: visitors build their own avatar and name, saved in their browser
 - **seven display modes (Dark, Light, Craft, Terminal, Neon, Sunset, Zen)** with a picker in the header: Dark, Light, Craft (Minecraft-style blocks and dirt), Terminal (green CRT), Neon, Sunset
-- **Minecraft touches**: a diamond-sword slash on every click, a creeper, pig, chicken (it lays eggs) and a bow-shooting skeleton in the footer, a chicken, pig and skeleton on your name (click mobs to hit them), spiders that drop from webs, cobwebs in the corners, flickering torches, rising XP orbs, sections that pop in as you scroll, Minecraft-style "Achievement made!" pop-ups and a "Mobs slain" counter. In Craft mode your cursor becomes a diamond sword. Turn all of this off in the Master panel under Site → Effects
+- **Minecraft touches**: a diamond-sword slash on every click, a creeper, chicken (it lays eggs) and a bow-shooting skeleton in the footer, a chicken, pig and skeleton on your name (click mobs to hit them), spiders that drop from webs, cobwebs in the corners, flickering torches, rising XP orbs, sections that pop in as you scroll, Minecraft-style "Achievement made!" pop-ups and a "Mobs slain" counter. In Craft mode your cursor becomes a diamond sword. Turn all of this off in the Master panel under Site → Effects
 - Animations: pixel-dissolve when switching modes, block-break bursts when you click, pixel cursor trail, scroll XP bar, floating pixels (clouds in Craft), card tilt, stepped hover effects, an interactive footer with a moving network and click-and-drag drawing
-- **Pixel buddy** beside the intro: idles, blinks, walks, jumps, and waves with a speech bubble ("Hi! Welcome!") when you hover, focus or tap it
 - **Animated name**: letters drop in, hop when hovered and ripple in a wave every few seconds
 - Easter egg: type the Konami code (up up down down left right left right B A)
 
