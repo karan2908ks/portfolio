@@ -728,7 +728,6 @@ nav a:nth-child(1){--n:0}nav a:nth-child(2){--n:1}nav a:nth-child(3){--n:2}nav a
         <button class="tab" role="tab" id="t-memory" aria-selected="false" aria-controls="p-memory" data-game="memory" style="--c:var(--cyan)">Memory <small>Mouse</small></button>
         <button class="tab" role="tab" id="t-dodge" aria-selected="false" aria-controls="p-dodge" data-game="dodge" style="--c:var(--mint)">Dodge <small>Arrows</small></button>
         <button class="tab" role="tab" id="t-typing" aria-selected="false" aria-controls="p-typing" data-game="typing" style="--c:var(--sun)">Typing Rush <small>Keyboard</small></button>
-        <button class="tab" role="tab" id="t-bughunt" aria-selected="false" aria-controls="p-bughunt" data-game="bughunt" style="--c:var(--coral)">Bug Hunt <small>Mouse</small></button>
       </div>
 
       <div class="cab">
@@ -804,12 +803,6 @@ nav a:nth-child(1){--n:0}nav a:nth-child(2){--n:1}nav a:nth-child(3){--n:2}nav a
             <div class="veil" data-veil="typing"><h4>Typing Rush</h4><p>Type each falling word before it lands. Three misses and it is over.</p><button class="btn sm">Play</button></div></div>
           <input class="typein" id="typeIn" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type the falling words here" placeholder="Type the word, it clears itself">
           <p class="howto">Just type. A word clears the moment you spell it right. Backspace fixes typos.</p>
-        </div>
-        <div id="p-bughunt" role="tabpanel" aria-labelledby="t-bughunt" data-panel="bughunt" hidden>
-          <div class="cab-top"><h3>Bug Hunt</h3><div class="hud px" data-hud="bughunt"><span>Score<b class="s">0</b></span><span>Best<b class="b">-</b></span></div></div>
-          <div class="screen"><canvas class="game" id="bughunt" width="360" height="420" aria-label="Bug Hunt game"></canvas>
-            <div class="veil" data-veil="bughunt"><h4>Bug Hunt</h4><p>Squash the bugs before they reach your code. Leave the good semicolons alone.</p><button class="btn sm">Play</button></div></div>
-          <p class="howto">Click or tap the bugs. Hitting a semicolon or letting a bug through costs a life.</p>
         </div>
       </div>
     </div>
@@ -894,7 +887,7 @@ nav a:nth-child(1){--n:0}nav a:nth-child(2){--n:1}nav a:nth-child(3){--n:2}nav a
   "mobs": true,
   "socials": [{"name": "GitHub", "url": ""}, {"name": "LinkedIn", "url": ""}],
   "sections": {"about": true, "loadout": true, "work": true, "player": true, "arcade": true, "contact": true},
-  "games": {"snake": true, "chess": true, "ttt": true, "dino": true, "memory": true, "dodge": true, "typing": true, "bughunt": true},
+  "games": {"snake": true, "chess": true, "ttt": true, "dino": true, "memory": true, "dodge": true, "typing": true},
   "skills": [
     {"title": "Languages", "color": "cyan", "items": ["C", "C++", "Python", "JavaScript"]},
     {"title": "Web", "color": "sun", "items": ["HTML", "CSS", "Canvas", "React"]},
@@ -2834,7 +2827,7 @@ function avatarEditor(host,cfg,onChange){
 /* ---------- state ---------- */
 var DEFAULT=JSON.parse($("#defaults").textContent);
 var SECS=["about","loadout","work","player","arcade","contact"];
-var GAMEKEYS=["snake","chess","ttt","dino","memory","dodge","typing","bughunt"];
+var GAMEKEYS=["snake","chess","ttt","dino","memory","dodge","typing"];
 function sanitize(o){
   var s=clone(DEFAULT);if(!o||typeof o!=="object")return s;
   var str=function(v,n){return typeof v==="string"?v.slice(0,n||400):null};
@@ -3542,51 +3535,6 @@ var Typing=(function(){
   return {stop:stop,start:start,running:function(){return run},pause:function(){if(run){stop();V.show("Paused","Scroll back and press play.","Restart")}}};
 })();
 
-/* ---------- BUG HUNT ---------- */
-var BugHunt=(function(){
-  var cv=$("#bughunt"),cx=cv.getContext("2d"),W=cv.width,HT=cv.height,H=makeHud("bughunt"),V=makeVeil("bughunt");
-  var items=[],t=0,last=0,run=false,raf=0,spawn=0,score=0,lives=3,flash=0,splats=[];
-  function start(){items=[];splats=[];t=0;spawn=.3;score=0;lives=3;flash=0;run=true;H.set(0);V.hide();last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(loop)}
-  function stop(){run=false;cancelAnimationFrame(raf)}
-  function over(){run=false;draw();var nb=H.finish(score);V.show("Build failed","Score "+score+(nb?". New best!":"."),"Play again")}
-  function loop(now){var dt=Math.min(.05,(now-last)/1000);last=now;step(dt);draw();if(run)raf=requestAnimationFrame(loop)}
-  function step(dt){
-    t+=dt;flash=Math.max(0,flash-dt);spawn-=dt;
-    if(spawn<=0){spawn=Math.max(.32,.95-t*.012);var good=Math.random()<.16;items.push({x:24+Math.random()*(W-48),y:-20,r:good?12:11+Math.random()*5,good:good,v:Math.min(200,56+t*1.8)+Math.random()*30,ph:Math.random()*6})}
-    for(var i=items.length-1;i>=0;i--){var o=items[i];o.y+=o.v*dt;o.ph+=dt*8;
-      if(o.y>HT-8){items.splice(i,1);if(!o.good){lives--;flash=.35;if(lives<=0){over();return}}}}
-    splats=splats.filter(function(s){s.t-=dt;return s.t>0});
-  }
-  function draw(){
-    cx.fillStyle=col.bg;cx.fillRect(0,0,W,HT);
-    cx.fillStyle=col.bg2;for(var y=20;y<HT;y+=26){cx.fillRect(16,y,40+((y*7)%120),5);cx.fillRect(70+((y*3)%60),y,80+((y*11)%100),5)}
-    cx.fillStyle=flash>0?col.coral:col.line;cx.fillRect(0,HT-6,W,6);
-    items.forEach(function(o){
-      if(o.good){cx.fillStyle=col.mint;cx.font="bold 28px 'Courier New',monospace";cx.textAlign="center";cx.fillText(";",o.x,o.y+10);return}
-      cx.strokeStyle=col.ink;cx.lineWidth=2;cx.beginPath();
-      [-1,0,1].forEach(function(k){var w=Math.sin(o.ph+k)*3;cx.moveTo(o.x-o.r*.7,o.y+k*o.r*.5);cx.lineTo(o.x-o.r*1.5,o.y+k*o.r*.8+w);cx.moveTo(o.x+o.r*.7,o.y+k*o.r*.5);cx.lineTo(o.x+o.r*1.5,o.y+k*o.r*.8-w)});cx.stroke();
-      cx.fillStyle=col.coral;cx.beginPath();cx.ellipse(o.x,o.y,o.r*.85,o.r,0,0,7);cx.fill();
-      cx.fillStyle=col.on;cx.fillRect(o.x-o.r*.4-1,o.y+o.r*.2,3,3);cx.fillRect(o.x+o.r*.4-2,o.y+o.r*.2,3,3);
-    });
-    splats.forEach(function(s){cx.globalAlpha=Math.min(1,s.t*3);cx.fillStyle=s.c;for(var k=0;k<6;k++){var a=k*1.05;cx.fillRect(s.x+Math.cos(a)*(14-s.t*18)-2,s.y+Math.sin(a)*(14-s.t*18)-2,4,4)}cx.globalAlpha=1});
-    cx.font="10px 'Press Start 2P',monospace";cx.textAlign="left";cx.fillStyle=col.coral;cx.fillText("LIVES "+Math.max(0,lives),10,HT-16);
-  }
-  function hit(e){
-    if(!run)return;var r=cv.getBoundingClientRect(),px=(e.clientX-r.left)/r.width*W,py=(e.clientY-r.top)/r.height*HT;
-    for(var i=items.length-1;i>=0;i--){var o=items[i];
-      if(Math.abs(px-o.x)<o.r*1.7+6&&Math.abs(py-o.y)<o.r*1.7+6){
-        items.splice(i,1);
-        if(o.good){lives--;flash=.35;splats.push({x:o.x,y:o.y,t:.4,c:col.mint});if(lives<=0)over()}
-        else{score+=10;H.set(score);splats.push({x:o.x,y:o.y,t:.4,c:col.coral})}
-        return;
-      }}
-  }
-  cv.addEventListener("pointerdown",hit);
-  V.btn.addEventListener("click",start);
-  draw();redrawers.push(function(){draw()});
-  return {stop:stop,running:function(){return run},pause:function(){if(run){stop();V.show("Paused","Scroll back and press play.","Restart")}}};
-})();
-
 /* ---------- TIC TAC TOE ---------- */
 var TTT=(function(){
   var grid=$("#tttGrid"),st=$("#tttStatus"),lvl=$("#tttLevel"),mode=$("#tttMode"),H=makeHud("ttt");
@@ -3804,7 +3752,7 @@ var me=null,lab={cfg:randomAvatar(),name:""};
     var nm=nameIn.value.trim()||"Guest";me={name:nm,av:clone(lab.cfg)};
     sset("ks-player",JSON.stringify(me));showMe();msg.textContent="Saved. Welcome, "+nm+"!";
   });
-  var scoresDef=[["Snake","snake",""],["Chess (level beaten)","chess",""],["Tic Tac Toe streak","ttt",""],["Memory (fewest moves)","memory",""],["Dino Rush","dino",""],["Dodge","dodge",""],["Typing Rush","typing",""],["Bug Hunt","bughunt",""]];
+  var scoresDef=[["Snake","snake",""],["Chess (level beaten)","chess",""],["Tic Tac Toe streak","ttt",""],["Memory (fewest moves)","memory",""],["Dino Rush","dino",""],["Dodge","dodge",""],["Typing Rush","typing",""]];
   function scores(){
     var box=$("#plScores");box.textContent="";
     scoresDef.forEach(function(s){var v=store.get("ks-"+s[1]);box.appendChild(h("div",null,h("span",null,s[0]),h("b",null,v||"-")))});
@@ -3836,7 +3784,7 @@ var me=null,lab={cfg:randomAvatar(),name:""};
 
 /* ---------- global leaderboard ---------- */
 LB=(function(){
-  var G=[["snake","Snake","pts",1],["dino","Dino Rush","pts",1],["dodge","Dodge","pts",1],["typing","Typing Rush","pts",10],["bughunt","Bug Hunt","pts",10],["memory","Memory","moves",8]];
+  var G=[["snake","Snake","pts",1],["dino","Dino Rush","pts",1],["dodge","Dodge","pts",1],["typing","Typing Rush","pts",10],["memory","Memory","moves",8]];
   var info={};G.forEach(function(g){info[g[0]]={name:g[1],unit:g[2],min:g[3]}});
   var run=null,pending=null,cur="snake",board=null,card=$("#lbSubmit"),list=$("#hofList"),tabs=$("#hofTabs");
   function ago(t){var s=Math.max(1,Math.floor((Date.now()-t)/1000));if(s<90)return "just now";var m=Math.floor(s/60);if(m<60)return m+" min ago";var hr=Math.floor(m/60);if(hr<48)return hr+" h ago";return Math.floor(hr/24)+" days ago"}
@@ -3894,7 +3842,7 @@ LB=(function(){
 })();
 
 /* ---------- tabs + keys ---------- */
-var games={snake:Snake,memory:Memory,dino:Dino,dodge:Dodge,typing:Typing,bughunt:BugHunt,ttt:TTT,chess:ChessG},current="snake";
+var games={snake:Snake,memory:Memory,dino:Dino,dodge:Dodge,typing:Typing,ttt:TTT,chess:ChessG},current="snake";
 function select(name,focus){
   current=name;
   Object.keys(games).forEach(function(k){if(k!==name)games[k].pause()});
@@ -4039,7 +3987,7 @@ function tabSite(){
   var names={about:"About",loadout:"Skills",work:"Projects",player:"Player lab",arcade:"Arcade",contact:"Contact"};
   SECS.forEach(function(k){w.appendChild(toggle(names[k],state.sections[k]!==false,function(v){state.sections[k]=v;markDirty()}))});
   w.appendChild(h("p",{class:"px"},"Games in the arcade"));
-  var gn={snake:"Snake",chess:"Chess",ttt:"Tic Tac Toe",dino:"Dino Rush",memory:"Memory Match",dodge:"Dodge",typing:"Typing Rush",bughunt:"Bug Hunt"};
+  var gn={snake:"Snake",chess:"Chess",ttt:"Tic Tac Toe",dino:"Dino Rush",memory:"Memory Match",dodge:"Dodge",typing:"Typing Rush"};
   GAMEKEYS.forEach(function(k){w.appendChild(toggle(gn[k],state.games[k]!==false,function(v){state.games[k]=v;markDirty()}))});
   w.appendChild(h("p",{class:"px"},"Effects"));
   w.appendChild(toggle("Pixel trail and block-break clicks",state.trail,function(v){state.trail=v;markDirty()}));
@@ -4057,7 +4005,7 @@ function tabAvatar(){
   return w;
 }
 function tabScores(){
-  var w=h("div",{class:"pf"}),names={snake:"Snake",dino:"Dino Rush",dodge:"Dodge",typing:"Typing Rush",bughunt:"Bug Hunt",memory:"Memory"};
+  var w=h("div",{class:"pf"}),names={snake:"Snake",dino:"Dino Rush",dodge:"Dodge",typing:"Typing Rush",memory:"Memory"};
   w.appendChild(h("p",{class:"hint"},"Remove any score you do not want on the public leaderboard. Changes apply right away."));
   var box=h("div",{class:"pf"});w.appendChild(box);
   function load(){

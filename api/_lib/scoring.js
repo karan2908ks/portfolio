@@ -13,7 +13,6 @@ const GAMES = {
   dino: { better: 'high', min: 1, max: 99999, rate: 40, slack: 20, minSeconds: 2 },
   dodge: { better: 'high', min: 1, max: 99999, rate: 24, slack: 60, minSeconds: 2 },
   typing: { better: 'high', min: 10, max: 99999, rate: 160, slack: 120, minSeconds: 3 },
-  bughunt: { better: 'high', min: 10, max: 99999, rate: 90, slack: 100, minSeconds: 3 },
   memory: { better: 'low', min: 8, max: 200, perMoveSeconds: 0.3, minSeconds: 4 }, // 8 pairs, so at least 8 moves
 };
 const AVATAR_KEYS = ['skin', 'hair', 'hairColor', 'eyes', 'mouth', 'gear', 'top', 'outfit', 'bgStyle', 'bg'];
