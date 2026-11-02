@@ -72,7 +72,6 @@
 [data-mode="zen"] .strip{background:#05080c;color:var(--cyan);border-color:#1f2937}
 [data-mode="zen"] .tab[aria-selected="true"],[data-mode="zen"] .opt.on{background:var(--cyan);color:#000}
 [data-mode="zen"] header{border-bottom:1px solid #1f2937}
-[data-mode="zen"] .amb .ltr{animation-duration:7s,9s}
 [data-mode="zen"] .bsprite svg{filter:drop-shadow(0 0 6px rgba(155,212,255,.5))}
 [data-mode="craft"]{--bg:#2b1d12;--bg2:#3c3c3c;--bg3:#5a5a5a;--ink:#f3ecd9;--mute:#cdbfa3;--line:#1b140d;--on:#17110a;--grid:#3a2817;
   --coral:#e0533b;--cyan:#3fd0d0;--sun:#f5c542;--mint:#6fc24a;--coralT:#ff7a5f;--mintT:#8fe06a;
@@ -484,46 +483,45 @@ header .xp i{display:block;height:100%;width:0;background:var(--sun);background-
 
 
 
-/* ---------- ambient name animation (runs by itself) ---------- */
+/* ---------- ambient text: plays when seen, then now and then ---------- */
 .aw{display:inline-block;white-space:nowrap}
-.amb.fx1 .ltr{animation-name:ambFlip,ambHue}
-.amb.fx2 .ltr{animation-name:ambPop,ambHue}
-.amb.fx3 .ltr{animation-name:ambWob,ambHue}
-@keyframes ambFlip{0%,58%,100%{transform:none}70%{transform:rotateX(180deg)}82%{transform:rotateX(360deg)}}
-@keyframes ambPop{0%,58%,100%{transform:none}70%{transform:scale(1.35)}82%{transform:scale(.9)}}
-@keyframes ambWob{0%,58%,100%{transform:none}66%{transform:rotate(-9deg) translateY(-.06em)}78%{transform:rotate(9deg)}}
+.amb .ltr{opacity:1;animation:none}
+.amb.play .ltr{animation:ambBob 1.3s steps(8) 1 both,ambHue 1.6s steps(8) 1 both;animation-delay:calc(var(--i)*70ms),calc(var(--i)*70ms)}
+.amb.fx1.play .ltr{animation-name:ambFlip,ambHue}
+.amb.fx2.play .ltr{animation-name:ambPop,ambHue}
+.amb.fx3.play .ltr{animation-name:ambWob,ambHue}
+.contact h2.amb.play .ltr{animation-name:ambBob,ambHueDark}
+@keyframes ambBob{0%,100%{transform:none}30%{transform:translateY(-.18em) rotate(-4deg)}55%{transform:translateY(.03em)}}
+@keyframes ambFlip{0%,100%{transform:none}50%{transform:rotateX(360deg)}}
+@keyframes ambPop{0%,100%{transform:none}35%{transform:scale(1.3)}65%{transform:scale(.92)}}
+@keyframes ambWob{0%,100%{transform:none}30%{transform:rotate(-9deg) translateY(-.06em)}60%{transform:rotate(9deg)}}
+@keyframes ambHue{0%,100%{color:inherit;text-shadow:none}35%{color:var(--sun);text-shadow:0 0 8px var(--sun)}}
+@keyframes ambHueDark{0%,100%{color:inherit}35%{color:var(--sun)}}
 .eyebrow::after{content:"_";animation:cblink 1s steps(2) infinite}
 @keyframes cblink{50%{opacity:0}}
-nav a{animation:navhop 7s steps(8) infinite;animation-delay:calc(var(--n,0)*.45s)}
-nav a:nth-child(1){--n:0}nav a:nth-child(2){--n:1}nav a:nth-child(3){--n:2}nav a:nth-child(4){--n:3}nav a:nth-child(5){--n:4}nav a:nth-child(6){--n:5}
-@keyframes navhop{0%,88%,100%{transform:none}93%{transform:translateY(-4px)}97%{transform:translateY(1px)}}
-.foot-soc a{animation:navhop 6s steps(8) infinite;animation-delay:calc(var(--n,0)*.5s)}
-.foot-soc a:nth-child(2){--n:1}.foot-soc a:nth-child(3){--n:2}.foot-soc a:nth-child(4){--n:3}.foot-soc a:nth-child(5){--n:4}
-.foot-kills b{display:inline-block;animation:ambPop 2.4s steps(6) infinite}
-.foot-big{animation:footglide 6s steps(12) infinite alternate}
-@keyframes footglide{to{letter-spacing:.01em}}
-.contact .sig,.contact h2{position:relative}
-.amb .ltr{animation:ambBob 3.4s steps(8) infinite,ambHue 4.8s steps(8) infinite;animation-delay:calc(var(--i)*110ms),calc(var(--i)*140ms);opacity:1}
-@keyframes ambBob{0%,55%,100%{transform:none}65%{transform:translateY(-.18em) rotate(-4deg)}78%{transform:translateY(.03em)}}
-@keyframes ambHue{0%,60%,100%{color:inherit;text-shadow:none}72%{color:var(--sun);text-shadow:0 0 8px var(--sun)}}
-.contact h2.amb .ltr{animation-name:ambBob,ambHueDark}
-@keyframes ambHueDark{0%,60%,100%{color:inherit}72%{color:var(--sun)}}
-.sig{margin:34px 0 0;font-family:var(--f-pixel);font-size:clamp(13px,2.4vw,20px);line-height:1.5}
-.sig b{color:inherit;font-weight:400;border-bottom:3px dashed currentColor;padding-bottom:3px}
-@media (prefers-reduced-motion:reduce){.amb .ltr,nav a,.foot-soc a,.foot-big,.eyebrow::after,.foot-kills b{animation:none}}
+.contact h2{position:relative}
+/* pause CSS animations that nobody can see */
+html.tab-hidden *,.paused-off,.paused-off *,.paused-off *::before,.paused-off *::after{animation-play-state:paused!important}
+/* Reduce effects switch (or the visitor's system setting) */
+[data-fx="low"] *,[data-fx="low"] *::before,[data-fx="low"] *::after{animation:none!important;transition:none!important}
+[data-fx="low"] .webzone,[data-fx="low"] .torch,[data-fx="low"] .orb,[data-fx="low"] .ground,[data-fx="low"] .slash,[data-fx="low"] .hsword,[data-fx="low"] .namemobs,[data-fx="low"] .mobrow,[data-fx="low"] #stars,[data-fx="low"] #trail,[data-fx="low"] .spawn,[data-fx="low"] .arrow{display:none!important}
+[data-fx="low"] body::after,[data-fx="low"] .card-player::before{display:none}
+[data-fx="low"] .card-player{transform:none!important}
 
 
 /* ---------- progress: level chip, sfx, trophies, champions, challenge, new games ---------- */
-.tools{display:flex;gap:8px;align-items:center;flex:none}
-.lvchip{display:flex;flex-direction:column;gap:4px;font-family:var(--f-pixel);font-size:9px;color:var(--ink);text-decoration:none;text-transform:uppercase;padding:7px 9px;border:2px solid var(--line);background:var(--bg3);min-width:62px}
+.pmenu{min-width:230px}
+.pm-title{font-family:var(--f-pixel);font-size:9px;color:var(--sunT);margin:6px 8px;line-height:1.7;text-transform:uppercase}
+.pmenu a,.pmenu button{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-pixel);font-size:10px;text-transform:uppercase;color:var(--ink);text-decoration:none;background:transparent;border:2px solid transparent;padding:10px;cursor:pointer;text-align:left}
+.pmenu a:hover,.pmenu button:hover{border-color:var(--line)}
+.pmenu button[aria-pressed="true"]{color:var(--mintT)}
+.pmenu button:disabled{opacity:.55;cursor:default}
+.lvchip{cursor:pointer;display:flex;flex-direction:column;gap:4px;font-family:var(--f-pixel);font-size:9px;color:var(--ink);text-decoration:none;text-transform:uppercase;padding:7px 9px;border:2px solid var(--line);background:var(--bg3);min-width:62px}
 .lvchip i{display:block;height:5px;background:var(--bg);border:1px solid var(--line)}
 .lvchip u{display:block;height:100%;width:0;background:var(--sun);text-decoration:none;transition:width .4s steps(6)}
 .lvchip.up{animation:lvup .9s steps(6) 1}
 @keyframes lvup{50%{transform:scale(1.18);box-shadow:0 0 0 3px var(--sun)}}
-.sfxbtn{font-family:var(--f-pixel);font-size:9px;text-transform:uppercase;background:var(--bg3);color:var(--mute);border:2px solid var(--line);padding:10px 9px;cursor:pointer;line-height:1}
-.sfxbtn[aria-pressed="true"]{color:var(--ink);border-color:var(--mint)}
-@media (max-width:760px){.lvchip i{display:none}.lvchip{min-width:0}.sfxbtn{padding:10px 7px}}
-.tro-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:20px}
+@media (max-width:760px){.lvchip i{display:none}.lvchip{min-width:0}.tro-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:20px}
 .tro-box{background:var(--bg2);border:3px solid var(--ink);padding:16px}
 .tro-box h3{font-family:var(--f-pixel);font-size:11px;text-transform:uppercase;margin:0 0 10px;color:var(--sunT)}
 .tro-box p{margin:4px 0;color:var(--mute);font-size:.95rem}
@@ -676,9 +674,14 @@ nav a:nth-child(1){--n:0}nav a:nth-child(2){--n:1}nav a:nth-child(3){--n:2}nav a
       <a href="#about" data-sec="about">About</a><a href="#loadout" data-sec="loadout">Skills</a><a href="#work" data-sec="work">Work</a><a href="#player" data-sec="player">Player</a><a href="#arcade" data-sec="arcade">Arcade</a><a href="#contact" data-sec="contact">Contact</a>
       <a class="mechip" id="meChip" href="#player" hidden><i id="meChipAv"></i><span id="meChipName"></span></a>
     </nav>
-    <div class="tools">
-      <a class="lvchip" id="lvChip" href="#trophies" aria-label="Your visitor level. Open achievements"><b id="lvNum">LV 1</b><i aria-hidden="true"><u id="lvFill"></u></i></a>
-      <button type="button" class="sfxbtn" id="sfxBtn" aria-pressed="false" aria-label="Sound effects">SFX off</button>
+    <div class="modewrap">
+      <button type="button" class="lvchip" id="lvChip" aria-haspopup="true" aria-expanded="false" aria-label="Player menu"><b id="lvNum">LV 1</b><i aria-hidden="true"><u id="lvFill"></u></i></button>
+      <div class="modemenu pmenu" id="playerMenu" hidden>
+        <p class="pm-title" id="pmTitle"></p>
+        <a class="pm-link" href="#trophies">Achievements</a>
+        <button type="button" id="sfxBtn" aria-pressed="false">Sound: off</button>
+        <button type="button" id="fxBtn" aria-pressed="false">Effects: full</button>
+      </div>
     </div>
     <div class="modewrap">
       <button type="button" class="modebtn" id="modeBtn" aria-haspopup="true" aria-expanded="false" aria-label="Change display mode"><i id="modeSw"></i><span id="modeName">Dark</span></button>
@@ -2749,7 +2752,10 @@ var $=function(s,r){return (r||document).querySelector(s)};
 var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 var rand=function(n){return Math.floor(Math.random()*n)};
 var clone=function(o){return JSON.parse(JSON.stringify(o))};
-var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+var sysReduce=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
+var fxPref=null;try{fxPref=localStorage.getItem("ks-fx")}catch(e){}
+var reduce=sysReduce||fxPref==="low";
+if(reduce)document.documentElement.setAttribute("data-fx","low");
 var sget=function(k){try{return localStorage.getItem(k)}catch(e){return null}};
 var sset=function(k,v){try{localStorage.setItem(k,v)}catch(e){}};
 var store={get:function(k){return +sget(k)||0},set:sset};
@@ -3035,7 +3041,7 @@ function makeVeil(name){
   c.style.display="block";
   var x=c.getContext("2d"),w,hgt,dots=[];
   function init(){var r=c.parentNode.getBoundingClientRect();w=c.width=Math.max(1,r.width);hgt=c.height=Math.max(1,r.height);dots=[];for(var i=0;i<46;i++)dots.push({x:Math.random()*w,y:Math.random()*hgt,s:3+rand(5),v:6+Math.random()*18,c:COLORS[rand(4)],a:.15+Math.random()*.3})}
-  var clouds=[];
+  var clouds=[],starsOn=true,starsRun=true;
   function frame(){
     x.clearRect(0,0,w,hgt);
     if(col.mode==="craft"){
@@ -3043,8 +3049,11 @@ function makeVeil(name){
       x.fillStyle="rgba(255,255,255,.2)";
       clouds.forEach(function(c){c.x+=c.v*.016;if(c.x>w+140)c.x=-140;var u=c.s;x.fillRect(c.x,c.y,u*6,u);x.fillRect(c.x+u,c.y-u,u*4,u);x.fillRect(c.x+u*2,c.y+u,u*3,u)});
     }
-    dots.forEach(function(d){d.y-=d.v*.016;if(d.y<-10){d.y=hgt+10;d.x=Math.random()*w}x.globalAlpha=d.a;x.fillStyle=col[d.c];x.fillRect(Math.round(d.x),Math.round(d.y),d.s,d.s)});x.globalAlpha=1;requestAnimationFrame(frame)}
+    dots.forEach(function(d){d.y-=d.v*.016;if(d.y<-10){d.y=hgt+10;d.x=Math.random()*w}x.globalAlpha=d.a;x.fillStyle=col[d.c];x.fillRect(Math.round(d.x),Math.round(d.y),d.s,d.s)});x.globalAlpha=1;if(starsOn&&!document.hidden)requestAnimationFrame(frame);else starsRun=false}
   init();addEventListener("resize",init);requestAnimationFrame(frame);
+  function wake(){if(starsOn&&!starsRun&&!document.hidden){starsRun=true;requestAnimationFrame(frame)}}
+  if("IntersectionObserver" in window)new IntersectionObserver(function(en){starsOn=en[0].isIntersecting;wake()}).observe(c.parentNode);
+  document.addEventListener("visibilitychange",wake);
 })();
 
 /* ---------- card tilt ---------- */
@@ -3357,7 +3366,7 @@ var Sfx=(function(){
   function beep(f,at,d,type,v,f2){var a=ac;if(!a)return;var o=a.createOscillator(),g=a.createGain(),t=a.currentTime+at;o.type=type||"square";o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(v||.05,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.02)}
   var S={click:function(){beep(520,0,.05,"square",.04)},kill:function(){beep(240,0,.14,"square",.06,90);beep(120,.05,.12,"sawtooth",.04,60)},level:function(){[440,554,659,880].forEach(function(f,i){beep(f,i*.09,.12,"square",.05)})},ach:function(){beep(660,0,.1,"square",.05);beep(990,.1,.16,"square",.05)},win:function(){[523,659,784].forEach(function(f,i){beep(f,i*.1,.14,"triangle",.07)})},lose:function(){beep(300,0,.18,"square",.05,120)}};
   function play(n){if(!on||!S[n])return;if(!ctx())return;S[n]()}
-  function draw(){if(!btn)return;btn.textContent="SFX "+(on?"on":"off");btn.setAttribute("aria-pressed",on?"true":"false")}
+  function draw(){if(!btn)return;btn.textContent="Sound: "+(on?"on":"off");btn.setAttribute("aria-pressed",on?"true":"false")}
   if(btn)btn.addEventListener("click",function(){on=!on;sset("ks-sfx",on?"1":"0");draw();if(on){ctx();S.click()}});
   addEventListener("pointerdown",function(e){if(on&&e.target.closest&&e.target.closest("a,button,.tab"))play("click")},true);
   draw();
@@ -3412,7 +3421,7 @@ var Prog=(function(){
   function note(t,d){try{Mobs.notify(t,d)}catch(e){}}
   function drawChip(){
     var n=$("#lvNum"),f=$("#lvFill"),c=$("#lvChip");if(!n)return;
-    n.textContent="LV "+lv();f.style.width=((xp%PER)/PER*100)+"%";c.title=title()+" - "+(PER-xp%PER)+" XP to level "+(lv()+1);
+    n.textContent="LV "+lv();f.style.width=((xp%PER)/PER*100)+"%";c.title=title()+" - "+(PER-xp%PER)+" XP to level "+(lv()+1);var pt=$("#pmTitle");if(pt)pt.textContent="Level "+lv()+" "+title()+" - "+(PER-xp%PER)+" XP to next";
   }
   function wall(){
     var a=$("#troLv"),b=$("#troSec"),g=$("#trophyGrid");if(!a||!b||!g)return;
@@ -4242,6 +4251,42 @@ if("IntersectionObserver" in window){
 }
 
 Prog.init(select);
+
+/* ---------- player menu (level, sound, effects) ---------- */
+(function(){
+  var btn=$("#lvChip"),menu=$("#playerMenu"),fx=$("#fxBtn");if(!btn||!menu)return;
+  function close(){menu.hidden=true;btn.setAttribute("aria-expanded","false")}
+  btn.addEventListener("click",function(e){e.stopPropagation();var o=menu.hidden;var mm=$("#modeMenu");if(mm)mm.hidden=true;menu.hidden=!o;btn.setAttribute("aria-expanded",String(o))});
+  document.addEventListener("click",function(e){if(!menu.hidden&&!menu.contains(e.target))close()});
+  menu.addEventListener("click",function(e){if(e.target.closest&&e.target.closest("a"))close()});
+  addEventListener("keydown",function(e){if(e.key==="Escape")close()});
+  if(fx){
+    fx.textContent="Effects: "+(reduce?"reduced":"full");fx.setAttribute("aria-pressed",reduce?"true":"false");
+    if(sysReduce){fx.disabled=true;fx.textContent="Effects: reduced (device)"}
+    fx.addEventListener("click",function(){try{localStorage.setItem("ks-fx",reduce?"full":"low")}catch(e){}location.reload()});
+  }
+})();
+/* ---------- text animation scheduler: once when seen, then every 12 s ---------- */
+(function(){
+  if(reduce)return;
+  function inView(el){var r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight}
+  setInterval(function(){
+    if(document.hidden)return;var now=Date.now();
+    $$(".amb").forEach(function(el){
+      if(!inView(el))return;
+      var last=+el.getAttribute("data-lp")||0;
+      if(!last||now-last>12000){el.setAttribute("data-lp",now);el.classList.remove("play");void el.offsetWidth;el.classList.add("play")}
+    });
+  },700);
+})();
+/* ---------- pause hidden-tab and off-screen animations ---------- */
+(function(){
+  var root=document.documentElement;
+  document.addEventListener("visibilitychange",function(){root.classList.toggle("tab-hidden",document.hidden)});
+  if(!("IntersectionObserver" in window))return;
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){x.target.classList.toggle("paused-off",!x.isIntersecting)})},{rootMargin:"120px"});
+  $$(".hero,section[id],.strip,.foot").forEach(function(el){io.observe(el)});
+})();
 
 /* ---------- Edit portal (owner) ---------- */
 var portal={el:null,tab:"profile",body:null,status:null};
