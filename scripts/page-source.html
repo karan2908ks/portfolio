@@ -1361,6 +1361,7 @@ var Mobs=(function(){
       later(wander,ms+900+Math.random()*1200);
     }
     later(wander,900);
+    var offT=0,chk=setInterval(function(){if(!alive){clearInterval(chk);return}var r=el.getBoundingClientRect();if(r.bottom<-30||r.top>innerHeight+30){offT++;if(offT>=2)gone()}else offT=0},700);timers.push(chk);
     el.addEventListener("pointerdown",function(e){e.stopPropagation();if(e.button>0)return;slash(e.clientX,e.clientY);hit(el,T.hp,function(){setTimeout(gone,150);if(Math.random()<.4){var r=el.getBoundingClientRect();setTimeout(function(){spawnNear(r.left+r.width/2,r.bottom)},260)}},T.pal,T.k)});
     later(function(){el.classList.add("fade");setTimeout(gone,700)},16000);
   }
