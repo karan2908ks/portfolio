@@ -28,6 +28,7 @@
 [data-mode="light"]{--bg:#f7f2e8;--bg2:#ece4d2;--bg3:#ded3bb;--ink:#1c1830;--mute:#5d5878;--line:#c9bea4;--on:#1c1830;--grid:#eee6d4;
   --coral:#d92d4a;--cyan:#0a7fb0;--sun:#b87900;--mint:#12915f;--coralT:#c92a43;--cyanT:#0a6f99;--sunT:#8a5f00;--mintT:#0b7a4f;--on:#ffffff;color-scheme:light}
 [data-mode="light"] .btn:not(.ghost),[data-mode="light"] .strip,[data-mode="light"] .contact,[data-mode="light"] .opt.on,[data-mode="light"] .tab[aria-selected="true"],[data-mode="light"] .proj .tag{color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.35)}
+[data-mode="light"] .amb .ltr{text-shadow:none!important}
 [data-mode="light"] .mail code{background:#1c1830;color:#ffd23f}
 [data-mode="light"] .contact .btn.ghost{color:#fff;border-color:#fff;box-shadow:5px 5px 0 #fff}
 [data-mode="light"] .contact .eyebrow{color:#fff}
@@ -78,8 +79,6 @@
   --f-display:"Pixelify Sans","Press Start 2P",system-ui,sans-serif;--f-body:"Pixelify Sans",system-ui,sans-serif}
 [data-mode="neon"]{--bg:#0b0720;--bg2:#150d33;--bg3:#22124d;--ink:#f6f0ff;--mute:#b3a6e6;--line:#4a2f9a;--on:#0b0720;--grid:#150d33;
   --coral:#ff4fd8;--cyan:#3df5ff;--sun:#c6ff3d;--mint:#9b8bff}
-[data-mode="sunset"]{--bg:#241020;--bg2:#3a1830;--bg3:#55223d;--ink:#fff1e6;--mute:#e0b5b0;--line:#7a3552;--on:#241020;--grid:#2f1428;
-  --coral:#ff7a45;--cyan:#ff4f8b;--sun:#ffc857;--mint:#9be7d8}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 [hidden]{display:none!important}
@@ -391,7 +390,7 @@ header .xp i{display:block;height:100%;width:0;background:var(--sun);background-
 [data-mode="craft"] .hero-av,[data-mode="craft"] .lab-av,[data-mode="craft"] .cp-id .cav{border-color:#0d0905;box-shadow:inset -4px -4px 0 rgba(0,0,0,.3),6px 6px 0 rgba(0,0,0,.5)}
 [data-mode="craft"] .chip{background:#2b2b2b;border-color:#0d0905}
 [data-mode="craft"] .bar i{background-image:repeating-linear-gradient(90deg,transparent 0 6px,rgba(0,0,0,.5) 6px 8px)}
-/* Neon / Sunset: soft glow */
+/* Neon: soft glow */
 [data-mode="neon"] .btn,[data-mode="neon"] .card-player,[data-mode="neon"] .cab{filter:drop-shadow(0 0 8px rgba(255,79,216,.35))}
 
 @media (max-width:980px){.lab{grid-template-columns:1fr}}
@@ -985,7 +984,7 @@ nav a:nth-child(1){--n:0}nav a:nth-child(2){--n:1}nav a:nth-child(3){--n:2}nav a
   "projects": [
     {"title": "Algo Visualizer", "desc": "Watch sorting and pathfinding algorithms run step by step, with speed control and a count of comparisons.", "tags": ["JavaScript", "Canvas", "DSA"], "link": "", "badge": "Sample"},
     {"title": "Campus Notes", "desc": "A shared notes and deadlines board for a class, with tags, search and an exam countdown.", "tags": ["Python", "SQL", "Flask"], "link": "", "badge": "Sample"},
-    {"title": "This Arcade", "desc": "Six mini games running on one page, including a chess bot powered by Stockfish. Play them below.", "tags": ["HTML", "CSS", "JavaScript"], "link": "", "badge": "Live"}
+    {"title": "This Arcade", "desc": "Nine mini games running on one page, including a chess bot powered by Stockfish. Play them below.", "tags": ["HTML", "CSS", "JavaScript"], "link": "", "badge": "Live"}
   ]
 }
 </script>
@@ -2784,7 +2783,6 @@ var MODES=[
   ["craft","Craft",["#e0533b","#3fd0d0","#f5c542","#6fc24a"]],
   ["cyberpunk","Cyberpunk",["#ff2a6d","#05d9e8","#fcee0a","#00ff9f"]],
   ["neon","Neon",["#ff4fd8","#3df5ff","#c6ff3d","#9b8bff"]],
-  ["sunset","Sunset",["#ff7a45","#ff4f8b","#ffc857","#9be7d8"]],
   ["zen","Zen",["#000000","#e9f2ff","#9bd4ff","#ffa45c"]]
 ];
 var col={mode:"dark",bg:"#15122b",bg2:"#1e1a42",bg3:"#2a2559",ink:"#f4efe4",mute:"#aaa4cf",line:"#3d3678",on:"#15122b",coral:"#ff5d73",cyan:"#4de3ff",sun:"#ffd23f",mint:"#6df0b0"};
@@ -2808,7 +2806,7 @@ function applyMode(id,animate){
   var nm=$("#modeName"),sw=$("#modeSw");
   if(nm)nm.textContent=m[1];
   if(sw){sw.textContent="";m[2].forEach(function(c){sw.appendChild(h("b",{style:"background:"+c}))})}
-  $$("#modeMenu button[data-mode]").forEach(function(b){b.setAttribute("aria-checked",b.dataset.mode===id)});
+  $$("#modeMenu button[data-pick]").forEach(function(b){b.setAttribute("aria-checked",b.dataset.pick===id)});
   redrawers.forEach(function(f){f()});
   if(animate&&old&&changed)wipe(oldBg);
 }
@@ -2826,7 +2824,7 @@ function wipe(color){
 (function(){
   var btn=$("#modeBtn"),menu=$("#modeMenu");
   MODES.forEach(function(m){
-    menu.appendChild(h("button",{type:"button",role:"menuitemradio","data-mode":m[0],"aria-checked":"false",onclick:function(){sset("ks-mode",m[0]);applyMode(m[0],true);close()}},
+    menu.appendChild(h("button",{type:"button",role:"menuitemradio","data-pick":m[0],"aria-checked":"false",onclick:function(){sset("ks-mode",m[0]);applyMode(m[0],true);close()}},
       h("span",null,m[1]),h("span",{class:"sw4"},m[2].map(function(c){return h("b",{style:"background:"+c})}))));
   });
   menu.appendChild(h("button",{type:"button",class:"rst",onclick:function(){try{localStorage.removeItem("ks-mode")}catch(e){}applyMode(resolveMode(),true);close()}},"Site default"));

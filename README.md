@@ -1,6 +1,6 @@
 # Karan Sharma · Pixel Arcade Portfolio
 
-A portfolio website with a playable pixel arcade, seven display modes (Dark, Light, Craft, Cyberpunk, Neon, Sunset, Zen) (Dark, Light, Craft, Cyberpunk, Neon, Sunset), an avatar maker and a password-protected **master panel** where you edit everything on the site without touching code.
+A portfolio website with a playable pixel arcade, six display modes (Dark, Light, Craft, Cyberpunk, Neon, Zen) (Dark, Light, Craft, Cyberpunk, Neon), an avatar maker and a password-protected **master panel** where you edit everything on the site without touching code.
 
 Built as plain HTML, CSS and JavaScript plus a few small serverless functions. No framework and no build step. Deploys to Vercel in a few minutes.
 
@@ -13,7 +13,7 @@ Built as plain HTML, CSS and JavaScript plus a few small serverless functions. N
 - Hero with your pixel avatar beside your name, a player card with stat bars, a skills marquee
 - About, Skills ("Loadout"), Projects, Contact
 - **Player lab**: visitors build their own avatar and name, saved in their browser
-- **seven display modes (Dark, Light, Craft, Cyberpunk, Neon, Sunset, Zen)** with a picker in the header: Dark, Light, Craft (Minecraft-style blocks and dirt), Terminal (green CRT), Neon, Sunset
+- **six display modes (Dark, Light, Craft, Cyberpunk, Neon, Zen)** with a picker in the header: Dark, Light, Craft (Minecraft-style blocks and dirt), Terminal (green CRT), Neon
 - **Minecraft touches**: a diamond-sword slash on every click, a creeper, chicken (it lays eggs) and a bow-shooting skeleton in the footer, a chicken, pig and skeleton on your name (click mobs to hit them), spiders that drop from webs, cobwebs in the corners, flickering torches, rising XP orbs, sections that pop in as you scroll, Minecraft-style "Achievement made!" pop-ups and a "Mobs slain" counter. In Craft mode your cursor becomes a diamond sword. Turn all of this off in the Master panel under Site → Effects
 - Animations: pixel-dissolve when switching modes, block-break bursts when you click, pixel cursor trail, scroll XP bar, floating pixels (clouds in Craft), card tilt, stepped hover effects, an interactive footer with a moving network and click-and-drag drawing
 - **Animated name**: letters drop in, hop when hovered and ripple in a wave every few seconds
