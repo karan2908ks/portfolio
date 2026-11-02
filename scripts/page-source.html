@@ -482,9 +482,6 @@ header .xp i{display:block;height:100%;width:0;background:var(--sun);background-
 @keyframes ambFlip{0%,58%,100%{transform:none}70%{transform:rotateX(180deg)}82%{transform:rotateX(360deg)}}
 @keyframes ambPop{0%,58%,100%{transform:none}70%{transform:scale(1.35)}82%{transform:scale(.9)}}
 @keyframes ambWob{0%,58%,100%{transform:none}66%{transform:rotate(-9deg) translateY(-.06em)}78%{transform:rotate(9deg)}}
-section h2.amb::after{content:"";display:block;height:6px;width:70px;margin-top:12px;background:repeating-linear-gradient(90deg,var(--coral) 0 10px,var(--sun) 10px 20px);animation:uline 3.2s steps(10) infinite alternate}
-.contact h2.amb::after{background:repeating-linear-gradient(90deg,var(--on) 0 10px,var(--sun) 10px 20px)}
-@keyframes uline{to{width:min(260px,100%)}}
 .eyebrow::after{content:"_";animation:cblink 1s steps(2) infinite}
 @keyframes cblink{50%{opacity:0}}
 nav a{animation:navhop 7s steps(8) infinite;animation-delay:calc(var(--n,0)*.45s)}
@@ -503,7 +500,7 @@ nav a:nth-child(1){--n:0}nav a:nth-child(2){--n:1}nav a:nth-child(3){--n:2}nav a
 @keyframes ambHueDark{0%,60%,100%{color:inherit}72%{color:var(--sun)}}
 .sig{margin:34px 0 0;font-family:var(--f-pixel);font-size:clamp(13px,2.4vw,20px);line-height:1.5}
 .sig b{color:inherit;font-weight:400;border-bottom:3px dashed currentColor;padding-bottom:3px}
-@media (prefers-reduced-motion:reduce){.amb .ltr,nav a,.foot-soc a,.foot-big,.eyebrow::after,section h2.amb::after,.foot-kills b{animation:none}}
+@media (prefers-reduced-motion:reduce){.amb .ltr,nav a,.foot-soc a,.foot-big,.eyebrow::after,.foot-kills b{animation:none}}
 
 
 /* ---------- progress: level chip, sfx, trophies, champions, challenge, new games ---------- */
@@ -903,7 +900,6 @@ nav a:nth-child(1){--n:0}nav a:nth-child(2){--n:1}nav a:nth-child(3){--n:2}nav a
         <button class="btn sm" id="copyBtn" type="button">Copy email</button>
         <span id="socials" class="btns"></span>
       </div>
-      <p class="sig px">- <b id="sigName">Karan Sharma</b></p>
     </div>
   </section>
 </div>
@@ -1214,7 +1210,7 @@ function render(){
   var parts=p.name.trim().split(/\s+/),first=parts.shift()||"",rest=parts.join(" ");
   letterize($("#hFirst"),first,0);letterize($("#hLast"),rest,first.length);$("#hFirst").parentNode.setAttribute("aria-label",first+" "+rest);
   ambient($("#logoName"),p.name,0);$("#cName").textContent=p.name;$("#cRole").textContent=p.role;
-  ambient($("#fName"),p.name,2);ambient($("#sigName"),p.name,3);$("#fName2").textContent=p.name;
+  ambient($("#fName"),p.name,2);$("#fName2").textContent=p.name;
   $("#hKicker").textContent=p.kicker;$("#cLv").textContent=p.level;
   $("#cStatus").textContent=p.status;$("#cQuest").textContent=String(p.quest||"").replace(/ship more/i,"build more");
   boldText($("#hTag"),p.tagline);
