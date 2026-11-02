@@ -93,10 +93,7 @@
     "dino": true,
     "memory": true,
     "dodge": true,
-    "typing": true,
-    "g2048": true,
-    "mines": true,
-    "react": true
+    "typing": true
   },
   "skills": [
     {
@@ -165,7 +162,7 @@
     },
     {
       "title": "This Arcade",
-      "desc": "Nine mini games running on one page, including a chess bot powered by Stockfish. Play them below.",
+      "desc": "Seven mini games running on one page, including a chess bot powered by Stockfish. Play them below.",
       "tags": [
         "HTML",
         "CSS",

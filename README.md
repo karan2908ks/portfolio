@@ -237,4 +237,4 @@ The code written for this project is MIT licensed (see `LICENSE`). The chess bot
 
 ## Extras
 
-- Mode-specific cursor trails and click effects, sound effects (off by default, toggle in the header), visitor XP and levels, daily streak, 6 hidden secrets, an achievements wall, challenge links (`?c=game-score`), a weekly champions banner, and the games 2048, Minesweeper and Reaction test (with leaderboard rules in `api/_lib/scoring.js`).
+- Mode-specific cursor trails and click effects, optional sound effects (off by default, button in the header), challenge links (`?c=game-score`), and the Typing Rush game (leaderboard rules in `api/_lib/scoring.js`).

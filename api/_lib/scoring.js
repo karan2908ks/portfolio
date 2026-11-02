@@ -13,9 +13,6 @@ const GAMES = {
   dino: { better: 'high', min: 1, max: 99999, rate: 40, slack: 20, minSeconds: 2 },
   dodge: { better: 'high', min: 1, max: 99999, rate: 24, slack: 60, minSeconds: 2 },
   typing: { better: 'high', min: 10, max: 99999, rate: 160, slack: 120, minSeconds: 3 },
-  g2048: { better: 'high', min: 20, max: 999999, rate: 150, slack: 400, minSeconds: 3 },
-  mines: { better: 'low', min: 5, max: 999, perMoveSeconds: 0.8, minSeconds: 5 },
-  react: { better: 'low', min: 100, max: 2000, perMoveSeconds: 0.02, minSeconds: 6 },
   memory: { better: 'low', min: 8, max: 200, perMoveSeconds: 0.3, minSeconds: 4 }, // 8 pairs, so at least 8 moves
 };
 const AVATAR_KEYS = ['skin', 'hair', 'hairColor', 'eyes', 'mouth', 'gear', 'top', 'outfit', 'bgStyle', 'bg'];
