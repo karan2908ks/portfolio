@@ -93,7 +93,10 @@
     "dino": true,
     "memory": true,
     "dodge": true,
-    "typing": true
+    "typing": true,
+    "g2048": true,
+    "mines": true,
+    "react": true
   },
   "skills": [
     {

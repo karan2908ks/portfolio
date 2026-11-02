@@ -1,6 +1,6 @@
 # Karan Sharma · Pixel Arcade Portfolio
 
-A portfolio website with a playable pixel arcade, seven display modes (Dark, Light, Craft, Terminal, Neon, Sunset, Zen) (Dark, Light, Craft, Terminal, Neon, Sunset), an avatar maker and a password-protected **master panel** where you edit everything on the site without touching code.
+A portfolio website with a playable pixel arcade, seven display modes (Dark, Light, Craft, Cyberpunk, Neon, Sunset, Zen) (Dark, Light, Craft, Cyberpunk, Neon, Sunset), an avatar maker and a password-protected **master panel** where you edit everything on the site without touching code.
 
 Built as plain HTML, CSS and JavaScript plus a few small serverless functions. No framework and no build step. Deploys to Vercel in a few minutes.
 
@@ -13,7 +13,7 @@ Built as plain HTML, CSS and JavaScript plus a few small serverless functions. N
 - Hero with your pixel avatar beside your name, a player card with stat bars, a skills marquee
 - About, Skills ("Loadout"), Projects, Contact
 - **Player lab**: visitors build their own avatar and name, saved in their browser
-- **seven display modes (Dark, Light, Craft, Terminal, Neon, Sunset, Zen)** with a picker in the header: Dark, Light, Craft (Minecraft-style blocks and dirt), Terminal (green CRT), Neon, Sunset
+- **seven display modes (Dark, Light, Craft, Cyberpunk, Neon, Sunset, Zen)** with a picker in the header: Dark, Light, Craft (Minecraft-style blocks and dirt), Terminal (green CRT), Neon, Sunset
 - **Minecraft touches**: a diamond-sword slash on every click, a creeper, chicken (it lays eggs) and a bow-shooting skeleton in the footer, a chicken, pig and skeleton on your name (click mobs to hit them), spiders that drop from webs, cobwebs in the corners, flickering torches, rising XP orbs, sections that pop in as you scroll, Minecraft-style "Achievement made!" pop-ups and a "Mobs slain" counter. In Craft mode your cursor becomes a diamond sword. Turn all of this off in the Master panel under Site → Effects
 - Animations: pixel-dissolve when switching modes, block-break bursts when you click, pixel cursor trail, scroll XP bar, floating pixels (clouds in Craft), card tilt, stepped hover effects, an interactive footer with a moving network and click-and-drag drawing
 - **Animated name**: letters drop in, hop when hovered and ripple in a wave every few seconds
@@ -233,3 +233,8 @@ Vercel project → **Settings → Domains** → add your domain and follow the D
 ## Licenses
 
 The code written for this project is MIT licensed (see `LICENSE`). The chess bot uses Stockfish (GPL v3) and chess.js (BSD). See `THIRD_PARTY_NOTICES.md` and keep the `public/licenses/` folder.
+
+
+## Extras
+
+- Mode-specific cursor trails and click effects, sound effects (off by default, toggle in the header), visitor XP and levels, daily streak, 6 hidden secrets, an achievements wall, challenge links (`?c=game-score`), a weekly champions banner, and the games 2048, Minesweeper and Reaction test (with leaderboard rules in `api/_lib/scoring.js`).
